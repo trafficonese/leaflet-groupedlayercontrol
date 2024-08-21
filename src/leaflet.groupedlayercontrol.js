@@ -211,7 +211,7 @@ L.Control.GroupedLayers = L.Control.extend({
       );
     }
 
-    this._expandIfNotCollapsed();
+    //this._expandIfNotCollapsed();
   },
 
   _update: function () {
@@ -506,7 +506,9 @@ L.Control.GroupedLayers = L.Control.extend({
   },
 
   _expandIfNotCollapsed: function () {
+    console.log("_expandIfNotCollapsed");
     if (this._map && !this.options.collapsed) {
+      console.log("expand this");
       this._expand();
     }
     return this;
