@@ -207,6 +207,8 @@ L.Control.GroupedLayers = L.Control.extend({
     if (this.options.sortGroups) {
       this._layers.sort(
         L.bind(function (a, b) {
+          console.log("a.group.name");console.log(a.group.name);
+          console.log("b.group.name");console.log(b.group.name);
           return this.options.sortFunction(a.group.name, b.group.name);
         }, this)
       );
