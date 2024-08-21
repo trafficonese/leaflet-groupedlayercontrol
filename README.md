@@ -42,7 +42,7 @@ var groupedOverlays = {
 L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 ```
 
-### Advanced usage
+### Options
 
 For added functionality, pass options when creating the layer control.
 
@@ -51,39 +51,59 @@ var options = {
   // Make the "Landmarks" group exclusive (use radio inputs)
   exclusiveGroups: ["Landmarks"],
   // Show a checkbox next to non-exclusive group labels for toggling all
-  groupCheckboxes: true
-};
-
-L.control.groupedLayers(baseLayers, groupedOverlays, options).addTo(map);
-```
-
-![advanced preview](preview-advanced.png)
-
-#### Collapsable Groups
-
-Enabling collapsable groups in the switcher can be done with the following options
-
-```javascript
-var options = {
+  groupCheckboxes: true,
+  sortLayers: true,
+  sortGroups: true,
+  sortBaseLayers: false,
+  collapsed: true,
+  position: "topright",
+  autoZIndex: true,
+  exclusiveGroups: [],
   // enable basic collapsability
   groupsCollapsable: true,
   // (Optional) The css class(es) used to indicated the group is expanded
   groupsExpandedClass: "glyphicon glyphicon-chevron-down", 
   // (Optional) The css class(es) used to indicated the group is collapsed
   groupsCollapsedClass: "glyphicon glyphicon-chevron-right"
+  sortFunction: function (nameA, nameB) {
+    if (nameA < nameB) {
+      return -1;
+    } else if (nameB < nameA) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 };
+
 L.control.groupedLayers(baseLayers, groupedOverlays, options).addTo(map);
 ```
 
+![advanced preview](preview-advanced.png)
 ![collapsable preview](preview-collapsable.png)
 
-### Adding a layer
+### Methods
+
+#### Adding a layer
 
 Adding a layer individually works similarly to the default layer control,
 except that you can also specify a group name, along with the layer and layer name.
 
 ```javascript
 layerControl.addOverlay(cities, "Cities", "Landmarks");
+```
+
+#### Adding a baselayer
+
+```javascript
+layerControl.addBaseLayer(newbaselayer, "Baselayer");
+```
+
+#### Removing a layer
+
+```javascript
+layerControl.removeLayer(cities);
+layerControl.removeLayer(newbaselayer);
 ```
 
 ## Note
