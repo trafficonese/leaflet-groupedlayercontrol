@@ -13,8 +13,6 @@ L.Control.GroupedLayers = L.Control.extend({
     exclusiveGroups: [],
     groupCheckboxes: false,
     groupsCollapsable: false,
-    sortLayers: false,
-    sortBaseLayers: false,
     groupsExpandedClass: "leaflet-control-layers-group-collapse-default",
     groupsCollapsedClass: "leaflet-control-layers-group-expand-default",
     sortFunction: function (nameA, nameB) {
