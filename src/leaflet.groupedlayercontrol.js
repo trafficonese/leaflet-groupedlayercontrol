@@ -94,7 +94,8 @@ L.Control.GroupedLayers = L.Control.extend({
   },
 
   _getLayer: function (id) {
-    for (var layer of this._layers) {
+    for (var i = 0; i < this._layers.length; i++) {
+      var layer = this._layers[i];
       if (layer && L.stamp(layer.layer) === id) {
         return layer;
       }
@@ -213,7 +214,8 @@ L.Control.GroupedLayers = L.Control.extend({
     var baseLayersPresent = false,
       overlaysPresent = false;
 
-    for (var obj of this._layers) {
+    for (var i = 0; i < this._layers.length; i++) {
+      var obj = this._layers[i];
       this._addItem(obj);
       overlaysPresent = overlaysPresent || obj.overlay;
       baseLayersPresent = baseLayersPresent || !obj.overlay;
@@ -358,7 +360,7 @@ L.Control.GroupedLayers = L.Control.extend({
     L.DomEvent.preventDefault(event);
     if (this.classList.contains("group-collapsable") && this.classList.contains("collapsed")){
       this.classList.remove("collapsed");
-    }else if (this.classList.contains("group-collapsable") && !this.classList.contains("collapsed")){
+    } else if (this.classList.contains("group-collapsable") && !this.classList.contains("collapsed")){
       this.classList.add("collapsed");
     }
   },
@@ -372,10 +374,14 @@ L.Control.GroupedLayers = L.Control.extend({
 
     var inputs = this_legend._form.getElementsByTagName('input');
 
-    for (var input of inputs) {
-      if (input.groupID === this.groupID && input.className === 'leaflet-control-layers-selector') {
+    for (var i = 0; i < inputs.length; i++) {
+      var input = inputs[i];
+      if (
+        input.groupID === this.groupID &&
+        input.className === "leaflet-control-layers-selector"
+      ) {
         input.checked = this.checked;
-        obj = this_legend._getLayer(input.layerId);
+        var obj = this_legend._getLayer(input.layerId);
         if (input.checked && !this_legend._map.hasLayer(obj.layer)) {
           this_legend._map.addLayer(obj.layer);
         } else if (!input.checked && this_legend._map.hasLayer(obj.layer)) {
@@ -395,8 +401,9 @@ L.Control.GroupedLayers = L.Control.extend({
 
     this._handlingClick = true;
 
-    for (var input of inputs) {
-      obj = this._getLayer(input.layerId);
+    for (var i = 0; i < inputs.length; i++) {
+      var input = inputs[i];
+      var obj = this._getLayer(input.layerId);
       if (input.checked && !this._map.hasLayer(obj.layer)) {
         toBeAdded = obj.layer;
       } else if (!input.checked && this._map.hasLayer(obj.layer)) {
