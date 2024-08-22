@@ -9,6 +9,10 @@
   overflow-y: scroll;
   padding-right: 10px;
 }
+.leaflet-control-layers-group input.leaflet-control-layers-group-selector {
+  margin-right: 3px;
+  vertical-align: sub;
+}
 .leaflet-control-layers-group-label {
   margin-bottom: 2px;
 }

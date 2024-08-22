@@ -211,7 +211,7 @@ L.Control.GroupedLayers = L.Control.extend({
       );
     }
 
-    //this._expandIfNotCollapsed();
+    this._expandIfNotCollapsed();
   },
 
   _update: function () {
