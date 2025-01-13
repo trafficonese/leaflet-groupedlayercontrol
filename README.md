@@ -61,6 +61,7 @@ var options = {
   exclusiveGroups: [],
   // enable basic collapsability
   groupsCollapsable: true,
+  groupsCollapsed: true,
   // (Optional) The css class(es) used to indicated the group is expanded
   groupsExpandedClass: "glyphicon glyphicon-chevron-down", 
   // (Optional) The css class(es) used to indicated the group is collapsed

@@ -13,6 +13,7 @@ L.Control.GroupedLayers = L.Control.extend({
     exclusiveGroups: [],
     groupCheckboxes: false,
     groupsCollapsable: false,
+    groupsCollapsed: true,
     groupsExpandedClass: "leaflet-control-layers-group-collapse-default",
     groupsCollapsedClass: "leaflet-control-layers-group-expand-default",
     sortFunction: function (nameA, nameB) {
@@ -339,7 +340,26 @@ L.Control.GroupedLayers = L.Control.extend({
 
         if (this.options.groupsCollapsable) {
           groupContainer.classList.add("group-collapsable");
-          groupContainer.classList.add("collapsed");
+
+          const groupsCollapsed = this.options.groupsCollapsed;
+
+          if (groupsCollapsed) {
+            // Normalize `groupsCollapsed` to an array or boolean
+            const normalizedGroups =
+              typeof groupsCollapsed === "string"
+                ? [groupsCollapsed] // Single string to array
+                : groupsCollapsed;
+
+            // Determine if the current group should be collapsed
+            const shouldCollapse =
+              normalizedGroups === true || // Collapse all groups
+              (Array.isArray(normalizedGroups) &&
+                normalizedGroups.includes(obj.group.name)); // Collapse specific groups
+
+            if (shouldCollapse) {
+              groupContainer.classList.add("collapsed");
+            }
+          }
 
           var groupMin = document.createElement("span");
           groupMin.className =
@@ -438,7 +458,7 @@ L.Control.GroupedLayers = L.Control.extend({
 
     for (var i = 0; i < inputs.length; i++) {
       var input = inputs[i];
-      if (L.DomUtil.hasClass(input, 'leaflet-control-layers-selector')) {
+      if (L.DomUtil.hasClass(input, "leaflet-control-layers-selector")) {
         var obj = this._getLayer(input.layerId);
         if (input.checked && !this._map.hasLayer(obj.layer)) {
           toBeAdded = obj.layer;
@@ -506,7 +526,7 @@ L.Control.GroupedLayers = L.Control.extend({
   },
 
   _expandIfNotCollapsed: function () {
-    console.log("_expandIfNotCollapsed");
+    //console.log("_expandIfNotCollapsed");
     if (this._map && !this.options.collapsed) {
       console.log("expand this");
       this._expand();

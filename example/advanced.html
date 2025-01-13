@@ -29,6 +29,10 @@
       "Random": {
         "Dogs": ExampleData.LayerGroups.dogs,
         "Cats": ExampleData.LayerGroups.cats
+      },
+      "AnotherGroup": {
+        "Dogs": ExampleData.LayerGroups.dogs,
+        "Cats": ExampleData.LayerGroups.cats
       }
     };
 
@@ -36,7 +40,15 @@
       // Make the "Landmarks" group exclusive (use radio inputs)
       exclusiveGroups: ["Landmarks"],
       // Show a checkbox next to non-exclusive group labels for toggling all
-      groupCheckboxes: true
+      groupCheckboxes: true,
+      groupsCollapsable: true,
+      //groupsCollapsed: false,
+      groupsCollapsed: ["AnotherGroup"],
+      groupCheckboxes: true,
+      sortLayers: false,
+      sortGroups: false,
+      sortBaseLayers: false,
+      collapsed: true
     };
 
     // Use the custom grouped layer control, not "L.control.layers"
